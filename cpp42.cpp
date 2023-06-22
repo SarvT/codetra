@@ -1,0 +1,15 @@
+// Leet
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        int lmax = height[0], rmax = height[n-1], lpos = 1, rpos = n-2, quantity = 0;
+        while(lpos <= rpos) {
+            if(height[lpos] >= lmax) lmax = height[lpos++];
+            else if(height[rpos] >= rmax) rmax = height[rpos--];
+            else if(lmax <= rmax && height[lpos] < lmax) quantity += lmax - height[lpos++];
+            else quantity += rmax - height[rpos--];
+        }
+        return quantity; 
+    }
+};
