@@ -34,7 +34,12 @@ public:
         sort(starts.begin(), starts.end());
         sort(ends.begin(), ends.end());
         vector<int> ans;
-        
+
+
+        Initialize the answer array ans and iterate over each person in people:
+        Perform a binary search on starts for the rightmost insertion index of person to find i.
+        Perform a binary search on ends for the rightmost insertion index of person to find j.
+            
         for (int person : people) {
             int i = upper_bound(starts.begin(), starts.end(), person) - starts.begin();
             int j = upper_bound(ends.begin(), ends.end(), person) - ends.begin();
