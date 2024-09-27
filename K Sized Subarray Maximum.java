@@ -137,3 +137,36 @@ class Solution {
         return sol;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// working version 
+ public ArrayList<Integer> max_of_subarrays(int k, int arr[]) {
+        // Your code here
+        ArrayList<Integer> sol = new ArrayList<>();
+        Deque<Integer> dq = new LinkedList<>();
+    
+        for (int i = 0; i < arr.length; i++) {
+            if (!dq.isEmpty() && dq.peekFirst() == i - k) dq.pollFirst();
+            while (!dq.isEmpty() && arr[dq.peekLast()] < arr[i]) dq.pollLast();
+            dq.addLast(i);
+            if (i >= k - 1) sol.add(arr[dq.peekFirst()]);
+        }
+    
+        return sol;
+    }
