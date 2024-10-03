@@ -1,0 +1,29 @@
+//worked
+class Solution {
+    public int minSubarray(int[] nums, int p) {
+        int sum=0;
+        ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
+
+        // This is a check
+        for(int it:nums)sum=(sum+it)%p;
+        int mod = sum%p;
+        if(mod==0) return 0;
+
+        // initialization for actual sol
+        int ans = nums.length, n=ans;
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        mp.put(0, -1);  // Initialize to handle cases when the first few elements form the result
+
+
+        int currSum=0;
+        for(int i=0; i<n; i++){
+            currSum= (currSum+nums[i])%p;
+            int requi = (currSum-mod+p)%p;
+            if(mp.containsKey(requi)) ans = Math.min(ans, i-mp.get(requi));
+            // store the eligible sum
+            mp.put(currSum, i);
+        }
+        // Return -1 if no valid subarray is found, otherwise the smallest length
+        return ans==n?-1:ans;
+    }
+}
