@@ -1,0 +1,34 @@
+// partial
+class Solution {
+public:
+    int maxAscendingSum(vector<int>& nums) {
+        int n=nums.size(), maxi=INT_MIN, sum=nums[0];
+        for(int i=1; i<n; i++){
+            if(nums[i]>nums[i-1]){
+                sum+=nums[i];
+            } else if(nums[i]<nums[i-1]){
+                maxi = max(maxi, sum);
+                sum=INT_MIN;
+            }
+        }
+        maxi = max(maxi, sum);
+        return maxi;
+    }
+};
+
+//worked
+class Solution {
+public:
+    int maxAscendingSum(vector<int>& nums) {
+        int maxSum = 0, currentSubarraySum = nums[0];
+
+        for (int currentIdx = 1; currentIdx < nums.size(); ++currentIdx) {
+            if (nums[currentIdx] <= nums[currentIdx - 1]) {
+                maxSum = max(maxSum, currentSubarraySum);
+                currentSubarraySum = 0;
+            }
+            currentSubarraySum += nums[currentIdx];
+        }
+        return max(maxSum, currentSubarraySum);
+    }
+};
